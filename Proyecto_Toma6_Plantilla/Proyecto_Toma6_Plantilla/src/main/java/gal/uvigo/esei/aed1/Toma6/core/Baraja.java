@@ -11,5 +11,5 @@ package gal.uvigo.esei.aed1.Toma6.core;
 
 public class Baraja {
     
-    
+    gshgsu
 }
