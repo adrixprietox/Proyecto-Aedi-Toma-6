@@ -7,30 +7,35 @@
  */
 package gal.uvigo.esei.aed1.Toma6.core;
 
+import java.util.List;
+
 
 
 public class Baraja {
 
-    private Carta[] cartas;
+    private List<Carta> baraja;
 
-    public Baraja(Carta[] cartas) {
-        this.cartas = new Carta[104];
-        cartaNueva();
+    public Baraja(List<Carta> baraja) {
+        this.baraja = baraja;
     }
+    
+    
 
     private void cartaNueva (){
         int numeroCarta = 1;
         for (int i = 0; i < 104; i++) {
             int bueyes = calcularBueyes (numeroCarta);
-            cartas[i] = new Carta (numeroCarta, bueyes);
+            baraja.add(new Carta(numeroCarta, bueyes));;
             numeroCarta++;
         }
     }
 
-
-    public Carta[] getCartas() {
-        return cartas;
+    public List<Carta> getBaraja() {
+        return baraja;
     }
+
+
+
 
     private static int calcularBueyes (int numeroCarta){
         if (numeroCarta % 5 == 0 && numeroCarta % 11 == 0){

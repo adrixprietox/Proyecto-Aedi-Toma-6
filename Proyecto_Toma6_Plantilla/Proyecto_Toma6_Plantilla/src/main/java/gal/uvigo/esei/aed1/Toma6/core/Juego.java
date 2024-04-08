@@ -7,13 +7,16 @@ package gal.uvigo.esei.aed1.Toma6.core;
 
 
 import gal.uvigo.esei.aed1.Toma6.iu.IU;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
 public class Juego {
     private final IU iu;
-
+    private List<Carta> baraja;
+    private Collection<Jugador> jugadores;
+    
     public Juego(IU iu) {
         this.iu = iu;
     }
@@ -47,6 +50,21 @@ public class Juego {
     }
 
     public void jugar() {
-        // Lógica para el juego...
+        // Mostrar cartas de cada jugador
+        for (Jugador jugador : jugadores) {
+            mostrarCartasJugadores(jugadores);
+        }
     }
-}
+    public void mostrarCartasJugadores(Collection<Jugador> jugadores) {
+        for (Jugador jugador : jugadores) {
+            System.out.println("Jugador: " + jugador.getNombre());
+            System.out.println("Cartas en la mano:");
+            for (Carta carta : jugador.getMano()) {
+                System.out.println("Número de carta: " + carta.getNumero() + ", Bueyes: " + carta.getBueyes());
+            }
+            System.out.println();
+        }
+    }
+    
+ }
+
