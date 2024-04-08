@@ -76,9 +76,14 @@ public class IU {
     public Collection<String> pedirNombresJugadores() {
         Collection<String> nombresJugadores = new ArrayList<>();
 
-        int numJugadores = leeNum("¿Cuántos jugadores/as van a jugar? (entre 2 y 10): ");
+        int numJugadores;
+        do {
+            numJugadores = leeNum("¿Cuántos jugadores/as van a jugar? (entre 2 y 10): ");
+        } while (numJugadores < 2 || numJugadores > 10);
+
         for (int i = 0; i < numJugadores; i++) {
-            nombresJugadores.add(leeString("Nombre del jugador " + (i + 1) + ": "));
+            String nombre = leeString("Nombre del jugador/a " + (i + 1) + ": ");
+            nombresJugadores.add(nombre);
         }
 
         return nombresJugadores;

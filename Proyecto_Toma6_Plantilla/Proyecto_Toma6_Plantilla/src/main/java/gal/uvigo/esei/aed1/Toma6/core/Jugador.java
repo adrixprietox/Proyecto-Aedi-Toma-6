@@ -38,7 +38,7 @@ public class Jugador {
 
         //PREGUNTA CUÁNTOS JUGADORES/AS VAN A PARTICIPAR 
         do{
-            System.out print("¿Cuántos jugadores/as van a jugar?")
+            System.out.print("¿Cuántos jugadores/as van a jugar?");
             numJugadores = scanner.nextInt();
 
         } while ( numJugadores < 2 || numJugadores > 10 );
@@ -52,6 +52,6 @@ public class Jugador {
             Jugador jugador = new Jugador(nombre);
             jugadores.add(jugador);
          }
-    return jugadores;
+        return jugadores;
 }
 }
