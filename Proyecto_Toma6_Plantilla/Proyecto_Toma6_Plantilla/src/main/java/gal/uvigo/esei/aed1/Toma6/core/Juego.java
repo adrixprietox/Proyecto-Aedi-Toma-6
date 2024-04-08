@@ -11,17 +11,13 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-
 public class Juego {
-    
     private final IU iu;
 
-    
-    public Juego(IU iu){
+    public Juego(IU iu) {
         this.iu = iu;
-
     }
-        
+
     public void repartirCartas(List<Carta> baraja, List<Jugador> jugadores) {
         // Verificar si hay suficientes cartas en la baraja
         if (baraja.size() < jugadores.size() * 10) {
@@ -49,11 +45,8 @@ public class Juego {
         // Luego de repartir las cartas, mostrar los datos de los jugadores
         iu.mostrarCartasJugadores(jugadores);
     }
-    public void jugar(){
-        
 
+    public void jugar() {
+        // Lógica para el juego...
     }
-    
-    
-    
 }

@@ -27,7 +27,5 @@ public class Carta {
         return "Carta{" + "numero=" + numero + ", bueyes=" + bueyes + '}';
     }
 
-
-    
-
 }
+
