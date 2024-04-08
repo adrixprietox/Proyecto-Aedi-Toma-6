@@ -30,28 +30,4 @@ public class Jugador {
         return mano;
     }
     
-    //METODO ESTATICO PARA CREAR JUGADORES DESDE LA ENTRADA DEL USUARIO
-    //CREO UNA LISTA  
-    public static List<Jugador> crearJugadores(){
-        Scanner scanner = new Scanner (System.in);
-        int numJugadores;
-
-        //PREGUNTA CUÁNTOS JUGADORES/AS VAN A PARTICIPAR 
-        do{
-            System.out.print("¿Cuántos jugadores/as van a jugar?");
-            numJugadores = scanner.nextInt();
-
-        } while ( numJugadores < 2 || numJugadores > 10 );
-
-        List<Jugador> jugador = new ArrayList<>();
-
-        //CREO CADA JUGADOR/A
-        for(int i = 0; i < numJugadores; i++){
-            System.out.println("Nombre del jugador/a" + (i + 1) + ": ");
-            String nombre = scanner.next();
-            Jugador jugador = new Jugador(nombre);
-            jugadores.add(jugador);
-         }
-        return jugadores;
-}
 }
