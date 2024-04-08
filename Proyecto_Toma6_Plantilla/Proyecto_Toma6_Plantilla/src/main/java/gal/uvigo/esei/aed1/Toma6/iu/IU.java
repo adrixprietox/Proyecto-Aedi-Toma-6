@@ -6,6 +6,10 @@
 package gal.uvigo.esei.aed1.Toma6.iu;
 
 import gal.uvigo.esei.aed1.Toma6.core.Jugador;
+import gal.uvigo.esei.aed1.Toma6.core.Juego;
+import gal.uvigo.esei.aed1.Toma6.core.Baraja;
+import gal.uvigo.esei.aed1.Toma6.core.Carta;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Scanner;
 
@@ -70,7 +74,14 @@ public class IU {
      * correspondiente
      */
     public Collection<String> pedirNombresJugadores() {
+        Collection<String> nombresJugadores = new ArrayList<>();
 
+        int numJugadores = leeNum("¿Cuántos jugadores/as van a jugar? (entre 2 y 10): ");
+        for (int i = 0; i < numJugadores; i++) {
+            nombresJugadores.add(leeString("Nombre del jugador " + (i + 1) + ": "));
+        }
+
+        return nombresJugadores;
     }
 
     /**
@@ -79,12 +90,7 @@ public class IU {
      * @param jugador Jugador para el cual se mostrarán los datos por pantalla
      */
     private void mostrarJugador(Jugador jugador) {
-
-    
-    
-    
-    
-    
+        // Aquí puedes implementar la lógica para mostrar los datos del jugador
     }
 
     /**
@@ -92,12 +98,15 @@ public class IU {
      *
      * @param jugadores Jugadores cuyos datos se mostrarán por pantalla
      */
-    public void mostrarJugadores(Collection<Jugador> jugadores) {
-
-    
-    
-    
-    
+    public void mostrarCartasJugadores(Collection<Jugador> jugadores) {
+        for (Jugador jugador : jugadores) {
+            System.out.println("Jugador: " + jugador.getNombre());
+            System.out.println("Cartas en la mano:");
+            for (Carta carta : jugador.getMano()) {
+                System.out.println("Número de carta: " + carta.getNumero() + ", Bueyes: " + carta.getBueyes());
+            }
+            System.out.println();
+        }
     }
 
 }
