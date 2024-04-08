@@ -29,5 +29,26 @@ public class Jugador {
     public List<Carta> getMano() {
         return mano;
     }
+
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Jugador :  ").append(this.nombre).append("\n");
+        for (Carta i : this.getMano()) {
+            sb.append(i.toString()).append("\t");
+        }
+        return sb.toString();
+    }
+    public String mostrarCartasJugador() {
+        StringBuilder sb = new StringBuilder();
+        int size = mano.size();
+        for (int i = 0; i < size; i++) {
+            sb.append(i + 1).append(") ");
+            sb.append(mano.get(i).toString());
+            sb.append("   ");
+        }
+        sb.append("\n");
+        return sb.toString();
+    }
+
     
 }

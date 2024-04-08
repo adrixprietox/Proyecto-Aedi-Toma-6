@@ -14,7 +14,7 @@ import java.util.List;
 public class Baraja {
 
     private List<Carta> baraja;
-
+    //constructor 
     public Baraja(List<Carta> baraja) {
         this.baraja = baraja;
     }

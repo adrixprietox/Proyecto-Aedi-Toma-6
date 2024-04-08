@@ -21,14 +21,14 @@ public class Juego {
         this.iu = iu;
     }
 
-    public void repartirCartas(List<Carta> baraja, List<Jugador> jugadores) {
+    public void repartirCartas(List<Carta> baraja, Collection<Jugador> jugadores) {
         // Verificar si hay suficientes cartas en la baraja
         if (baraja.size() < jugadores.size() * 10) {
             iu.mostrarMensaje("No hay suficientes cartas en la baraja para repartir.");
             return;
         }
 
-        // Barajar la baraja de cartas
+        // Baraja la baraja de cartas
         Collections.shuffle(baraja);
 
         // Repartir 10 cartas a cada jugador
@@ -45,26 +45,23 @@ public class Juego {
         for (Jugador jugador : jugadores) {
             Collections.sort(jugador.getMano(), Comparator.comparingInt(Carta::getNumero));
         }
-        // Luego de repartir las cartas, mostrar los datos de los jugadores
-        iu.mostrarCartasJugadores(jugadores);
+
     }
 
     public void jugar() {
-        // Mostrar cartas de cada jugador
-        for (Jugador jugador : jugadores) {
-            mostrarCartasJugadores(jugadores);
-        }
+        iu.mostrarMensaje("Comenzando juego de toma 6"
+                + "\nSe recomienda jugar en pantalla completa\n");
+        jugadores = iu.pedirNombresJugadores();
+
+        iu.mostrarMensaje("\nPreparando la partida y "
+                + "repartiendo cartas, por favor espere");
+        
+        repartirCartas(baraja, jugadores);
+        iu.mostrarJugadores(jugadores);
+        
+        
     }
-    public void mostrarCartasJugadores(Collection<Jugador> jugadores) {
-        for (Jugador jugador : jugadores) {
-            System.out.println("Jugador: " + jugador.getNombre());
-            System.out.println("Cartas en la mano:");
-            for (Carta carta : jugador.getMano()) {
-                System.out.println("Número de carta: " + carta.getNumero() + ", Bueyes: " + carta.getBueyes());
-            }
-            System.out.println();
-        }
-    }
+    
     
  }
 
