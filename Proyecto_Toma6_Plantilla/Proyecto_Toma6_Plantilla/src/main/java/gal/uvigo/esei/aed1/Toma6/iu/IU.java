@@ -1,12 +1,16 @@
 /**
- * Representa la interfaz del juego Toma 6, en este proyecto va a ser una entrada/salida en modo texto 
+ * Representa la interfaz del juego Toma 6, en este proyecto va a ser una entrada/salida en modo texto
  * Se recomienda una implementación modular.
  */
-
 package gal.uvigo.esei.aed1.Toma6.iu;
 
 import gal.uvigo.esei.aed1.Toma6.core.Jugador;
+import gal.uvigo.esei.aed1.Toma6.core.Juego;
+import gal.uvigo.esei.aed1.Toma6.core.Baraja;
+import gal.uvigo.esei.aed1.Toma6.core.Carta;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Scanner;
 
 public class IU {
@@ -69,7 +73,20 @@ public class IU {
      * @return Los datos de los jugadores almacenados en la estructura de datos
      * correspondiente
      */
-    public Collection<String> pedirNombresJugadores() {
+    public List<Jugador> pedirNombresJugadores() {
+        List<Jugador> nombresJugadores = new ArrayList<>();
+
+        int numJugadores;
+        do {
+            numJugadores = leeNum("¿Cuántos jugadores/as van a jugar? (entre 2 y 10): ");
+        } while (numJugadores < 2 || numJugadores > 10);
+
+        for (int i = 0; i < numJugadores; i++) {
+            String nombre = leeString("Nombre del jugador/a " + (i + 1) + ": ");
+            Jugador nuevo = new Jugador(nombre);
+            nombresJugadores.add(nuevo);
+        }
+        return nombresJugadores;
 
     }
 
@@ -78,13 +95,9 @@ public class IU {
      *
      * @param jugador Jugador para el cual se mostrarán los datos por pantalla
      */
-    private void mostrarJugador(Jugador jugador) {
+    public void mostrarJugador(Jugador jugador) {
+        mostrarMensaje(jugador.toString() + "\n");
 
-    
-    
-    
-    
-    
     }
 
     /**
@@ -92,12 +105,21 @@ public class IU {
      *
      * @param jugadores Jugadores cuyos datos se mostrarán por pantalla
      */
-    public void mostrarJugadores(Collection<Jugador> jugadores) {
+    
 
-    
-    
-    
-    
+    /**
+     *
+     * Muestra una lista de jugadores por pantalla
+     *
+     *
+     *
+     * @param listaJugadores Los jugadores a mostrar
+     *
+     */
+    public void mostrarJugadores(Collection<Jugador> listaJugadores) {
+        for (Jugador jugador : listaJugadores) {
+            mostrarJugador(jugador);
+        }
     }
 
-}
+    }
