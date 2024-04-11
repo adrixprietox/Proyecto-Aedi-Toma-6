@@ -4,10 +4,8 @@
  */
 package gal.uvigo.esei.aed1.Toma6.iu;
 
-import gal.uvigo.esei.aed1.Toma6.core.Jugador;
-import gal.uvigo.esei.aed1.Toma6.core.Juego;
-import gal.uvigo.esei.aed1.Toma6.core.Baraja;
-import gal.uvigo.esei.aed1.Toma6.core.Carta;
+import gal.uvigo.esei.aed1.Toma6.core.*;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -73,17 +71,20 @@ public class IU {
      * @return Los datos de los jugadores almacenados en la estructura de datos
      * correspondiente
      */
-    public List<Jugador> pedirNombresJugadores() {
-        List<Jugador> nombresJugadores = new ArrayList<>();
-
+    public int pedirNumeroJugadores(){
         int numJugadores;
         do {
             numJugadores = leeNum("¿Cuántos jugadores/as van a jugar? (entre 2 y 10): ");
         } while (numJugadores < 2 || numJugadores > 10);
-
+        return numJugadores;
+              
+    }
+    
+    public List<String> pedirNombresJugadores(int numJugadores) {
+        List<String> nombresJugadores = new ArrayList<>();
         for (int i = 0; i < numJugadores; i++) {
             String nombre = leeString("Nombre del jugador/a " + (i + 1) + ": ");
-            Jugador nuevo = new Jugador(nombre);
+            String nuevo = new String(nombre);
             nombresJugadores.add(nuevo);
         }
         return nombresJugadores;

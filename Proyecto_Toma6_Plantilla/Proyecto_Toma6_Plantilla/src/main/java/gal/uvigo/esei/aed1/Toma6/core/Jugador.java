@@ -29,6 +29,11 @@ public class Jugador {
     public List<Carta> getMano() {
         return mano;
     }
+    
+    public void recibirCarta(Carta carta){
+        mano.add(carta); // PREGUNTAR COMO SE ORDENA(EN ESTE CASO SOLO SE ESTA AÑADIENDO LA CARTA A LA MANO
+        
+    }
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
