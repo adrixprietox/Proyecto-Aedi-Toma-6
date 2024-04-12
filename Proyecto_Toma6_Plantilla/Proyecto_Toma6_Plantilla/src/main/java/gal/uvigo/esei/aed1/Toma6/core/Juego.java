@@ -27,6 +27,7 @@ public class Juego {
     
     public Juego(IU iu) {
         this.iu = iu;
+        this.baraja = new Stack<>();
     }
 
     public void repartirCartas() {
@@ -64,6 +65,7 @@ public class Juego {
         
         repartirCartas();
         iu.mostrarJugadores(jugadores);
+       
         
         
     }
