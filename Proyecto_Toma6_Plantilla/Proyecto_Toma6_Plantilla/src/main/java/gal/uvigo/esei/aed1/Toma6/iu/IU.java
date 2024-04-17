@@ -120,8 +120,9 @@ public class IU {
     public void mostrarJugadores(Collection<Jugador> listaJugadores) {
         for (Jugador jugador : listaJugadores) {
             mostrarJugador(jugador);
-            mostrarCartasJugador();
+            jugador.mostrarCartasJugador();
         }
     }
+    
 
     }

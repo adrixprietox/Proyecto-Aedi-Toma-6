@@ -31,7 +31,15 @@ public class Jugador {
     }
     
     public void recibirCarta(Carta carta){
-        mano.add(carta); // PREGUNTAR COMO SE ORDENA(EN ESTE CASO SOLO SE ESTA AÑADIENDO LA CARTA A LA MANO
+        if(mano.isEmpty()){
+            mano.add(carta);
+        }
+         
+        int i =0;
+        while(i<mano.size() && carta.getNumero() > mano.get(i).getNumero()){
+            i++;
+        }
+        mano.add(i,carta);
         
     }
 
