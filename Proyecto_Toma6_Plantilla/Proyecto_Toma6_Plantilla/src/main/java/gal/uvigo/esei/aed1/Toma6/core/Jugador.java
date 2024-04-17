@@ -38,6 +38,7 @@ public class Jugador {
         int i =0;
         while(i<mano.size() && carta.getNumero() > mano.get(i).getNumero()){
             i++;
+            
         }
         mano.add(i,carta);
         

@@ -30,6 +30,21 @@ public class Baraja {
     public Stack<Carta> getBaraja() {
         return baraja;
     }
+    
+    
+    public boolean barajaVacia(){
+        if(baraja.empty()){
+            return true;
+        }else{
+            return false;
+        }
+        
+    }
+    public Carta retirarDeBaraja(){
+       return baraja.pop();
+    }
+    
+    
     private static int calcularBueyes (int numeroCarta){
         if (numeroCarta % 5 == 0 && numeroCarta % 11 == 0){
             return 7;

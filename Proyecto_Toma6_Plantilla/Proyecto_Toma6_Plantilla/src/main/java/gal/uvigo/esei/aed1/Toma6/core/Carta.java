@@ -4,28 +4,35 @@
  */
 package gal.uvigo.esei.aed1.Toma6.core;
 
-
-
 public class Carta {
+
     private int numero;
     private int bueyes;
-
+    
     public Carta(int numero, int bueyes) {
         this.numero = numero;
         this.bueyes = bueyes;
     }
+
     public int getNumero() {
         return numero;
     }
-
+    
     public int getBueyes() {
         return bueyes;
     }
-
+    
     @Override
     public String toString() {
-        return "Carta{" + "numero=" + numero + ", bueyes=" + bueyes + '}';
+        StringBuilder sb = new StringBuilder();
+        for (int i = 1; i <= 10; i++) {
+            sb.append("Carta ").append(i).append(":");
+            sb.append("{numero=").append(numero);
+            sb.append(", bueyes=").append(bueyes);
+            sb.append('}').append(" ");
+        }
+        
+        return sb.toString();
     }
-
+    
 }
-

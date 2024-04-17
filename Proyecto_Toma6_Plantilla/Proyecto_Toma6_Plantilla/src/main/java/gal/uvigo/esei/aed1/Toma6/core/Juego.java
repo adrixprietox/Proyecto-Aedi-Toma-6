@@ -16,10 +16,10 @@ import java.util.Stack;
 
 public class Juego {
     private final IU iu;
-    private Stack<Carta> baraja;
+    private Baraja baraja;
     private Collection<Jugador> jugadores;
     
-    public Juego(IU iu, Stack<Carta> baraja, Collection<Jugador> jugadores) {
+    public Juego(IU iu,Baraja baraja, Collection<Jugador> jugadores) {
         this.iu = iu;
         this.baraja = baraja;
         this.jugadores = jugadores;
@@ -27,7 +27,7 @@ public class Juego {
     
     public Juego(IU iu) {
         this.iu = iu;
-        this.baraja = new Stack<>();
+        this.baraja = new Baraja() ;
     }
 
     public void repartirCartas() {
@@ -35,8 +35,8 @@ public class Juego {
         // Repartir 10 cartas a cada jugador
         for (int i = 0; i < 10; i++) {
             for (Jugador jugador : jugadores) {
-                if (!baraja.isEmpty()) {
-                    Carta carta = baraja.pop(); // Quitar la carta del tope de la baraja
+                if (!baraja.barajaVacia()) {
+                    Carta carta = baraja.retirarDeBaraja(); // Quitar la carta del tope de la baraja
                     jugador.recibirCarta(carta);   // Agregar la carta a la mano del jugador
                 }
             }
