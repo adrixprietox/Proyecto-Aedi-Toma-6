@@ -13,11 +13,15 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Stack;
+import gal.uvigo.esei.aed1.Toma6.core.*;
+
 
 public class Juego {
     private final IU iu;
     private Baraja baraja;
     private Collection<Jugador> jugadores;
+    private Mesa mesa;
+
     
     public Juego(IU iu,Baraja baraja, Collection<Jugador> jugadores) {
         this.iu = iu;
@@ -66,7 +70,15 @@ public class Juego {
         repartirCartas();
         iu.mostrarJugadores(jugadores);
         
-        
+         iu.mostrarMensaje("El jugador que comenzara la partida es:\t"
+                + listaJugadores.get(pos).getNombre());
+        boolean continuar = true;
+     
+
+           
+        iu.mostrarMesa(mesa);
+
+          
         
     }
     

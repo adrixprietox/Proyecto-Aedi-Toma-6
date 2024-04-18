@@ -124,5 +124,10 @@ public class IU {
         }
     }
     
+    
+       public void mostrarMesa(Mesa mesa) {
+        mostrarMensaje("Estado de la mesa:\n" + mesa.toString());
+    }
+    
 
     }
