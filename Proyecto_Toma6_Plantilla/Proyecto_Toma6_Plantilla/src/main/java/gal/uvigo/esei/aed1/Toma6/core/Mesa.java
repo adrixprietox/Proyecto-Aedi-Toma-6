@@ -39,10 +39,10 @@ public class Mesa {
         StringBuilder sb = new StringBuilder();
         sb.append("Mesa:\n");
          for (int i = 0; i < cuatroSobrantes.length; i++) {
-            sb.append("Fila ").append(i + 1).append(": ");
+            sb.append("Fila ").append(i).append(": ");
             if (cuatroSobrantes[i] != null) {
                 for (Carta carta : cuatroSobrantes[i]) {
-                    sb.append(carta).append(" ");
+                    sb.append(carta.toString()).append(" ");
                 }
             }
             sb.append("\n");
