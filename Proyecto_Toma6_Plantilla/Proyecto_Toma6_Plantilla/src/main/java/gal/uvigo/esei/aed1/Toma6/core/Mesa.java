@@ -35,35 +35,19 @@ public class Mesa {
         
     }
     
-        public String toString() {
-       // Carta. cuatroSobrantes = Carta.Palos.values();
-        int size =;
-        StringBuilder toRet = new StringBuilder();
-        for (int i = 0; i < size; i++) {
-            StringBuilder sb = new StringBuilder();
-            sb.append(String.format("%8s" ,cuatroSobrantes[i].name()+":" ));
-            sb.append("  ");
-            if (!cuatroSobrantes[i].isEmpty()) {
-                //Pone espacios en blanco en las posiciones sin carta
-                int vacios = cuatroSobrantes[i].peekFirst().getNumero() - 1;
-                for (int j = 0; j < vacios; j++) {
-                    sb.append(" ").append(" ");
-                }
-                //Pone las cartas
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Mesa:\n");
+         for (int i = 0; i < cuatroSobrantes.length; i++) {
+            sb.append("Fila ").append(i + 1).append(": ");
+            if (cuatroSobrantes[i] != null) {
                 for (Carta carta : cuatroSobrantes[i]) {
-                    sb.append(carta.getNumero()).append(" ");
-                }
-                //Pone espacios en blanco en las posiciones sin cartas
-                vacios = 12 - cuatroSobrantes[i].peekLast().getNumero();
-                for (int j = 0; j < vacios; j++) {
-                    sb.append(" ").append(" ");
+                    sb.append(carta).append(" ");
                 }
             }
-           
+            sb.append("\n");
         }
-        return toRet.toString();
+        return sb.toString();
     }
 
-    
-    
 }

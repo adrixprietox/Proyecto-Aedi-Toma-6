@@ -70,8 +70,7 @@ public class Juego {
         repartirCartas();
         iu.mostrarJugadores(jugadores);
         
-         iu.mostrarMensaje("El jugador que comenzara la partida es:\t"
-                + listaJugadores.get(pos).getNombre());
+     
         boolean continuar = true;
      
 
