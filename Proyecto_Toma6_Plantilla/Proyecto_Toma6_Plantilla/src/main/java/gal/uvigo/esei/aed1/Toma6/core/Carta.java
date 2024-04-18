@@ -25,12 +25,11 @@ public class Carta {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for (int i = 1; i <= 10; i++) {
-            sb.append("Carta ").append(i).append(":");
+            sb.append("Carta ").append(":");
             sb.append("{numero=").append(numero);
             sb.append(", bueyes=").append(bueyes);
-            sb.append('}').append(" ");
-        }
+            sb.append('}').append("");
+        
         
         return sb.toString();
     }

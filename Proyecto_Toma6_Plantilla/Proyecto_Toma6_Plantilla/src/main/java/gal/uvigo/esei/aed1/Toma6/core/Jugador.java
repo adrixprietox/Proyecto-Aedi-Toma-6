@@ -44,6 +44,7 @@ public class Jugador {
         
     }
 
+
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Jugador :  ").append(this.nombre).append("\n");

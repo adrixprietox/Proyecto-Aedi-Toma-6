@@ -27,8 +27,8 @@ public class Mesa {
 
     public void contenidoMesa (){
         for (int i = 0; i < numFilas; i++){
-            for (int j = 0; j < numMaxCol; i++){
-                System.out.println(cuatroSobrantes);
+            for (int j = 0; j < numMaxCol; j++){
+                System.out.println(cuatroSobrantes[i][j]);
             }
         }
         
