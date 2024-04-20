@@ -37,6 +37,7 @@ public class Juego {
     public void repartirCartas() {
 
         // Repartir 10 cartas a cada jugador
+        baraja.barajar(); // llamo al metodo barajar antes de repartir
         for (int i = 0; i < 10; i++) {
             for (Jugador jugador : jugadores) {
                 if (!baraja.barajaVacia()) {

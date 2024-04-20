@@ -33,11 +33,7 @@ public class Baraja {
     
     
     public boolean barajaVacia(){
-        if(baraja.empty()){
-            return true;
-        }else{
-            return false;
-        }
+        return baraja.empty(); //simplicar la funcion
         
     }
     public Carta retirarDeBaraja(){
@@ -58,8 +54,7 @@ public class Baraja {
             return 1;
         }
     }
-    public static Stack<Carta> barajar(Stack <Carta> baraja){
-        Collections.shuffle(baraja);
-        return baraja;
+    public void barajar() {
+        Collections.shuffle(baraja); // el metodo barajar no deberia devolver nada
     }
 }

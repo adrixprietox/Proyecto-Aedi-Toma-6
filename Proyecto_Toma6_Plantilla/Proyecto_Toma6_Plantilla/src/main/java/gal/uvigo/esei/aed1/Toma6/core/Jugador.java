@@ -33,14 +33,15 @@ public class Jugador {
     public void recibirCarta(Carta carta){
         if(mano.isEmpty()){
             mano.add(carta);
-        }
+        }else{
          
-        int i =0;
-        while(i<mano.size() && carta.getNumero() > mano.get(i).getNumero()){
-            i++;
+            int i =0;
+            while(i<mano.size() && carta.getNumero() > mano.get(i).getNumero()){
+                i++;
             
+            }
+            mano.add(i,carta);
         }
-        mano.add(i,carta);
         
     }
 
