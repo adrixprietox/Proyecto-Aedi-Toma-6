@@ -21,7 +21,6 @@ public class Juego {
     private Baraja baraja;
     private Collection<Jugador> jugadores;
     private Mesa mesa;
-
     
     public Juego(IU iu,Baraja baraja, Collection<Jugador> jugadores) {
         this.iu = iu;
@@ -32,6 +31,7 @@ public class Juego {
     public Juego(IU iu) {
         this.iu = iu;
         this.baraja = new Baraja() ;
+        this.mesa = new Mesa(baraja);
     }
 
     public void repartirCartas() {
@@ -58,6 +58,7 @@ public class Juego {
         
     }
 
+
     public void jugar() {
         iu.mostrarMensaje("Comenzando juego de toma 6"
                 + "\nSe recomienda jugar en pantalla completa\n");
@@ -70,14 +71,8 @@ public class Juego {
         
         repartirCartas();
         iu.mostrarJugadores(jugadores);
-        
-     
-        boolean continuar = true;
-     
-
-           
-        iu.mostrarMesa(mesa);
-
+        Carta carta = baraja.retirarDeBaraja(); // Obtener una carta de la baraja
+        mesa.colocarCuatroSobrantesEnMesa(carta); // Colocar la carta en la mesa
           
         
     }

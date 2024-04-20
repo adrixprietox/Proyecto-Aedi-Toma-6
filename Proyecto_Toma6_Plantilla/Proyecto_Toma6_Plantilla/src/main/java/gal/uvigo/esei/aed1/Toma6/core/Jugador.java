@@ -4,21 +4,20 @@
  * Funcionalidad: Añadir carta a la mano (añadir la carta de foma que queden 
  * ordenadas de menor a mayor por su número), convertir a String el objeto Jugador (toString)
  */
-
 package gal.uvigo.esei.aed1.Toma6.core;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-
 public class Jugador {
+
     private String nombre;
     private List<Carta> mano;
-    public Jugador (String nombre){
+
+    public Jugador(String nombre) {
         this.nombre = nombre;
         this.mano = new ArrayList<>();
-
 
     }
 
@@ -29,22 +28,25 @@ public class Jugador {
     public List<Carta> getMano() {
         return mano;
     }
-    
-    public void recibirCarta(Carta carta){
-        if(mano.isEmpty()){
+
+    public void recibirCarta(Carta carta) {
+        if (mano.isEmpty()) {
             mano.add(carta);
-        }else{
-         
-            int i =0;
-            while(i<mano.size() && carta.getNumero() > mano.get(i).getNumero()){
+        } else {
+
+            int i = 0;
+            while (i < mano.size() && carta.getNumero() > mano.get(i).getNumero()) {
                 i++;
-            
+
             }
-            mano.add(i,carta);
+            mano.add(i, carta);
         }
-        
+
     }
 
+    public void retirarCarta(Carta carta) { // quita una carta de la mano del jugador
+        mano.remove(carta);
+    }
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -54,6 +56,7 @@ public class Jugador {
         }
         return sb.toString();
     }
+
     public String mostrarCartasJugador() {
         StringBuilder sb = new StringBuilder();
         int size = mano.size();
@@ -66,5 +69,4 @@ public class Jugador {
         return sb.toString();
     }
 
-    
 }

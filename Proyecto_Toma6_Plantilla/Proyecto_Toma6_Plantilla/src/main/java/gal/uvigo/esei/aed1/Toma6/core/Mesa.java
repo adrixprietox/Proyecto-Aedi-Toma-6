@@ -4,50 +4,42 @@
  */
 package gal.uvigo.esei.aed1.Toma6.core;
 
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  *
  * @author adrian
  */
 public class Mesa {
-    
-    private Carta[][] cuatroSobrantes; // Array de cartas bidimensional para representar las filas de cartas sobrantes
-    private final int numFilas= 4; // Número de filas
-    private final int numMaxCol= 5; // Máximo de cartas por columna
 
-    public Mesa() {
-        cuatroSobrantes = new Carta[numFilas][numMaxCol]; // Inicializar el array bidimensional
-        // Llenar las columnas con cartas iniciales
-        for (int i = 0; i < numFilas; i++) {
-            for (int j = 0; j < numMaxCol; j++) {
-                // Creamos una nueva carta con valores específicos
-                cuatroSobrantes[i][j] = new Carta(numFilas,numMaxCol); // Supongamos que la carta inicial tiene valores 0 y 0
-            }
+    private List<Carta>[] cuatroSobrantes; // Array de listas
+    private Baraja baraja;
+
+    public Mesa(Baraja baraja) {
+        this.baraja = baraja;
+        cuatroSobrantes = new List[4]; // un array de 4 elementos(en este caso,cada elemento es una lista)
+        for (int i = 0; i < 4; i++) {
+            cuatroSobrantes[i] = new LinkedList<>(); // inicializamos las cuatro listas vacias 
         }
     }
 
-    public void contenidoMesa (){
-        for (int i = 0; i < numFilas; i++){
-            for (int j = 0; j < numMaxCol; j++){
-                System.out.println(cuatroSobrantes[i][j]);
-            }
+    public void colocarCuatroSobrantesEnMesa(Carta carta) {
+        // Iterar sobre cada lista en cuatroSobrantes
+        for (List<Carta> lista : cuatroSobrantes) {
+            Carta cartaDiferente = baraja.retirarDeBaraja(); // Obtener una carta diferente de la baraja
+            lista.add(0, cartaDiferente); // Agregar la carta al principio de la lista
         }
-        
-        
-    }
-    
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Mesa:\n");
-         for (int i = 0; i < cuatroSobrantes.length; i++) {
-            sb.append("Fila ").append(i).append(": ");
-            if (cuatroSobrantes[i] != null) {
-                for (Carta carta : cuatroSobrantes[i]) {
-                    sb.append(carta.toString()).append(" ");
-                }
-            }
-            sb.append("\n");
-        }
-        return sb.toString();
     }
 
+    public void mostrarContenidoMesa() {
+        for (int i = 0; i < cuatroSobrantes.length; i++) {
+            System.out.println("Lista " + (i + 1) + ":");
+            List<Carta> lista = cuatroSobrantes[i];
+            for (Carta carta : lista) {
+                System.out.println(carta);
+            }
+            System.out.println();
+        }
+    }
 }

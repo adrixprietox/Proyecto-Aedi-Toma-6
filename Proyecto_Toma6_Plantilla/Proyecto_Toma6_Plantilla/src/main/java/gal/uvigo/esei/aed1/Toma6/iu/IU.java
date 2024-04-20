@@ -71,15 +71,15 @@ public class IU {
      * @return Los datos de los jugadores almacenados en la estructura de datos
      * correspondiente
      */
-    public int pedirNumeroJugadores(){
+    public int pedirNumeroJugadores() {
         int numJugadores;
         do {
             numJugadores = leeNum("¿Cuántos jugadores/as van a jugar? (entre 2 y 10): ");
         } while (numJugadores < 2 || numJugadores > 10);
         return numJugadores;
-              
+
     }
-    
+
     public List<String> pedirNombresJugadores(int numJugadores) {
         List<String> nombresJugadores = new ArrayList<>();
         for (int i = 0; i < numJugadores; i++) {
@@ -106,8 +106,6 @@ public class IU {
      *
      * @param jugadores Jugadores cuyos datos se mostrarán por pantalla
      */
-    
-
     /**
      *
      * Muestra una lista de jugadores por pantalla
@@ -123,11 +121,17 @@ public class IU {
             jugador.mostrarCartasJugador();
         }
     }
-    
-    
-       public void mostrarMesa(Mesa mesa) {
+
+    public void mostrarMesa(Mesa mesa) {
         mostrarMensaje("Estado de la mesa:\n" + mesa.toString());
     }
-    
-
+    /**
+     * Pide al usuario que seleccione una carta de su mano.
+     *
+     * @return El número de la carta seleccionada.
+     */
+    public int pedirSeleccionCarta() {
+        return leeNum("Elige el número de la carta que deseas colocar en la mesa: ");
     }
+
+}
