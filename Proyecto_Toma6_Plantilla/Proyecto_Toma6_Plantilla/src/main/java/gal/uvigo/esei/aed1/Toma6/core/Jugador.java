@@ -14,7 +14,7 @@ public class Jugador {
 
     private String nombre;
     private List<Carta> mano;
-
+    private Carta cartaSeleccionada; 
     public Jugador(String nombre) {
         this.nombre = nombre;
         this.mano = new ArrayList<>();
@@ -28,6 +28,20 @@ public class Jugador {
     public List<Carta> getMano() {
         return mano;
     }
+
+    public Carta getCartaSeleccionada() {
+        return cartaSeleccionada;
+    }
+    
+    public void seleccionarCarta(Carta carta) {
+        this.cartaSeleccionada = carta;
+    }
+
+    public void setCartaSeleccionada(Carta cartaSeleccionada) {
+        this.cartaSeleccionada = cartaSeleccionada;
+    }
+    
+    
 
     public void recibirCarta(Carta carta) {
         if (mano.isEmpty()) {
