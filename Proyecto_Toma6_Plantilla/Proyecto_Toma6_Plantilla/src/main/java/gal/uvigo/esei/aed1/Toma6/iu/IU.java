@@ -97,7 +97,7 @@ public class IU {
      * @param jugador Jugador para el cual se mostrarán los datos por pantalla
      */
     public void mostrarJugador(Jugador jugador) {
-        mostrarMensaje(jugador.toString() + "\n");
+        mostrarMensaje(jugador.toString() + "\n"); 
 
     }
 
