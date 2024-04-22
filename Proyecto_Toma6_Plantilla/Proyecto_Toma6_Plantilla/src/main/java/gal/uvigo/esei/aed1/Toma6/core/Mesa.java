@@ -24,6 +24,11 @@ public class Mesa {
         }
     }
 
+    public List<Carta>[] getCuatroSobrantes() {
+        return cuatroSobrantes;
+    }
+    
+
     public void colocarCuatroSobrantesEnMesa(Carta carta) {
         // Iterar sobre cada lista en cuatroSobrantes
         for (List<Carta> lista : cuatroSobrantes) {
