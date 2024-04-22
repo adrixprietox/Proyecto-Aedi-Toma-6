@@ -90,6 +90,7 @@ public class Juego {
         iu.mostrarJugadores(jugadores);
         Carta carta = baraja.retirarDeBaraja(); // Obtener una carta de la baraja
         mesa.colocarCuatroSobrantesEnMesa(carta); // Colocar la carta en la mesa
+        mesa.mostrarContenidoMesa();
         for (Jugador jugador : jugadores) {
             seleccionarCarta(jugador);
         }
