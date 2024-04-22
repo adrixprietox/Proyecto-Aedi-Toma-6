@@ -85,12 +85,13 @@ public class Juego {
 
         iu.mostrarMensaje("\nPreparando la partida y "
                 + "repartiendo cartas, por favor espere");
+        
 
         repartirCartas();
         iu.mostrarJugadores(jugadores);
         Carta carta = baraja.retirarDeBaraja(); // Obtener una carta de la baraja
         mesa.colocarCuatroSobrantesEnMesa(carta); // Colocar la carta en la mesa
-        mesa.mostrarContenidoMesa();
+        
         for (Jugador jugador : jugadores) {
             seleccionarCarta(jugador);
         }
