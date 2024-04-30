@@ -71,16 +71,4 @@ public class Jugador {
         return sb.toString();
     }
 
-    public String mostrarCartasJugador() {
-        StringBuilder sb = new StringBuilder();
-        int size = mano.size();
-        for (int i = 0; i < size; i++) {
-            sb.append(i + 1).append(") ");
-            sb.append(mano.get(i).toString());
-            sb.append("   ");
-        }
-        sb.append("\n");
-        return sb.toString();
-    }
-
 }

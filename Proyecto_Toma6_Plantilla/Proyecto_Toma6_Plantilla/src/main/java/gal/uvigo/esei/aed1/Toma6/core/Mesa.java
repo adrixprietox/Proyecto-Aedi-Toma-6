@@ -16,8 +16,8 @@ public class Mesa {
     private List<Carta>[] cuatroSobrantes; // Array de listas
     private Baraja baraja;
 
-    public Mesa(Baraja baraja) {
-        this.baraja = baraja;
+    public Mesa() {
+        this.baraja = new Baraja();
         cuatroSobrantes = new List[4]; // un array de 4 elementos(en este caso,cada elemento es una lista)
         for (int i = 0; i < 4; i++) {
             cuatroSobrantes[i] = new LinkedList<>(); // inicializamos las cuatro listas vacias 
@@ -27,14 +27,13 @@ public class Mesa {
     public List<Carta>[] getCuatroSobrantes() {
         return cuatroSobrantes;
     }
-    
 
-    public void colocarCuatroSobrantesEnMesa(Carta carta) {
-        // Iterar sobre cada lista en cuatroSobrantes
-        for (List<Carta> lista : cuatroSobrantes) {
-            Carta cartaDiferente = baraja.retirarDeBaraja(); // Obtener una carta diferente de la baraja
-            lista.add(0, cartaDiferente); // Agregar la carta al principio de la lista
+    public void colocarCuatroSobrantesEnMesa(List<Carta> cuatroCartas) {
+        // recorre la lista cuatroSobrantes
+        for (int i = 0; i < cuatroSobrantes.length; i++) {
+            cuatroSobrantes[i].add(0, cuatroCartas.get(i)); // Agregar la carta al principio de la lista
         }
+
     }
 
     public void mostrarContenidoMesa() {

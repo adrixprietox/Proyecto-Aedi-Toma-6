@@ -19,19 +19,21 @@ public class Juego {
     private Baraja baraja;
     private List<Jugador> jugadores;
     private Mesa mesa;
+    private List<Par<Jugador, Carta>> selecciones;
 
-    public Juego(IU iu, Baraja baraja, List<Jugador> jugadores) {
+    public Juego(IU iu, Baraja baraja, List<Jugador> jugadores, List<Par<Jugador, Carta>> selecciones) {
         this.iu = iu;
         this.baraja = baraja;
         this.jugadores = jugadores;
-        this.mesa = new Mesa(baraja);
+        this.mesa = new Mesa();
+        this.selecciones = new ArrayList<>();
 
     }
 
     public Juego(IU iu) {
         this.iu = iu;
         this.baraja = new Baraja();
-        this.mesa = new Mesa(baraja);
+        this.mesa = new Mesa();
     }
 
     public void repartirCartas() {
@@ -59,10 +61,20 @@ public class Juego {
 
     }
 
+    public static List<Carta> crearCuatroCartas(Baraja baraja) {
+        List<Carta> cuatroCartas = new ArrayList<>();
+        // Agregar las cuatro cartas a la lista
+        for (int i = 0; i < 4; i++) {
+            Carta carta = baraja.retirarDeBaraja();
+            cuatroCartas.add(carta);
+        }
+        return cuatroCartas;
+    }
+
     private void seleccionarCarta(Jugador jugador) {
         iu.mostrarMensaje("\nTurno de " + jugador.getNombre() + " para seleccionar una carta.");
         iu.mostrarMensaje("Tu mano actual:");
-        iu.mostrarMensaje(jugador.mostrarCartasJugador());
+        iu.mostrarMensaje(jugador.toString());
 
         int seleccion;
         do {
@@ -73,15 +85,18 @@ public class Juego {
         } while (seleccion < 1 || seleccion > jugador.getMano().size());
 
         Carta cartaSeleccionada = jugador.getMano().get(seleccion - 1); // Obtener la carta seleccionada
+        selecciones.add(new Par<>(jugador, cartaSeleccionada));
         jugador.setCartaSeleccionada(cartaSeleccionada);
         jugador.retirarCarta(cartaSeleccionada); // Retirar la carta de la mano del jugador
         iu.mostrarMensaje(jugador.getNombre() + " ha seleccionado la carta: " + cartaSeleccionada);
     }
 
-    public void mostrarEstadoDeLaMesa() {
-        // Mostrar el estado actual de la mesa
-        iu.mostrarMensaje("Estado actual de la mesa:");
-        mesa.mostrarContenidoMesa();
+    public void mostrarSeleccionesJugadores() {
+        for (Par<Jugador, Carta> relacion : selecciones) {
+            Jugador jugador = relacion.getPrimero();
+            Carta cartaSeleccionada = relacion.getSegundo();
+            System.out.println(jugador.getNombre() + " ha seleccionado la carta: " + cartaSeleccionada);
+        }
     }
 
     private List<Carta> obtenerCartasEnOrdenCreciente(List<Jugador> jugadores) { //ORDENA LAS CARTAS SELECCIONADAS EN UN ARRAY
@@ -99,29 +114,6 @@ public class Juego {
         return cartasEnOrden;
     }
 
-//    public void colocarCartasSeleccionadas(List<Carta> cartasSeleccionadas, List<Carta>[] cuatroSobrantes) { //COLOCA LAS CARTAS SELECCIONADAS
-//        // Itera sobre las cartas seleccionadas de los jugadores
-//        for (Carta carta : cartasSeleccionadas) {
-//            // Encuentra la pila de descarte adecuada para colocar la carta seleccionada
-//            int[] posicion = encontrarPosicionParaCarta(carta, cuatroSobrantes);
-//
-//            // Si se encuentra una posición válida, coloca la carta en esa pila
-//            if (posicion[0] != -1 && posicion[1] != -1) {
-//                // Verificar si la fila está llena
-//                if (cuatroSobrantes[posicion[0]].size() >= 5) {
-//                    iu.mostrarMensaje("La fila " + (posicion[0] + 1) + " está llena. La carta se devuelve a la baraja.");
-//                    // Devolver la carta a la baraja
-//                    baraja.getBaraja().push(carta);
-//                } else {
-//                    // La fila no está llena, colocar la carta en esa pila
-//                    cuatroSobrantes[posicion[0]].add(posicion[1], carta);
-//                }
-//            } else {
-//                // Manejar el caso en el que no se puede colocar la carta
-//                // Esto podría incluir devolver la carta al jugador o al mazo, dependiendo de las reglas del juego.
-//            }
-//        }
-//    }
     private int[] encontrarPosicionParaCarta(Carta carta, List<Carta>[] cuatroSobrantes) {
         int[] posicion = {-1, -1}; // Inicializa la posición como no encontrada
         int diferenciaMinima = Integer.MAX_VALUE; // Inicializa la diferencia mínima como el máximo valor entero
@@ -154,7 +146,7 @@ public class Juego {
         if (!lista.isEmpty()) {
             return lista.get(lista.size() - 1); // Obtener la última carta de la lista
         } else {
-            return null; // La lista está vacía
+            return null; // lista vacia es null
         }
     }
 
@@ -182,7 +174,7 @@ public class Juego {
             return; // Salir del método
         }
 
-        // Itera sobre las cartas seleccionadas de los jugadores
+        // Recorre las cartas seleccionadas de los jugadores
         for (Carta carta : cartasSeleccionadas) {
             // Encuentra la pila de descarte adecuada para colocar la carta seleccionada
             int[] posicion = encontrarPosicionParaCarta(carta, cuatroSobrantes);
@@ -205,15 +197,16 @@ public class Juego {
             }
         }
     }
+
     private boolean todosSinCartas() {
-    // Verificar si todos los jugadores están sin cartas en la mano
-    for (Jugador jugador : jugadores) {
-        if (!jugador.getMano().isEmpty()) {
-            return false; // Al menos un jugador tiene cartas en la mano
+        // recorre los jugadores
+        for (Jugador jugador : jugadores) {
+            if (!jugador.getMano().isEmpty()) {
+                return false; // Al menos un jugador tiene cartas en la mano
+            }
         }
+        return true; // Todos los jugadores están sin cartas en la mano
     }
-    return true; // Todos los jugadores están sin cartas en la mano
-}
 
     public void jugar() {
         iu.mostrarMensaje("Comenzando juego de toma 6"
@@ -227,50 +220,32 @@ public class Juego {
 
         repartirCartas();
         iu.mostrarJugadores(jugadores);
-        Carta carta = baraja.retirarDeBaraja(); // Obtener una carta de la baraja
-        mesa.colocarCuatroSobrantesEnMesa(carta); // Colocar la carta en la mesa
+        List<Carta> cuatroCartas = new ArrayList<>();
+        cuatroCartas = crearCuatroCartas(baraja);
+        mesa.colocarCuatroSobrantesEnMesa(cuatroCartas); // Colocar la carta en la mesa
         mesa.mostrarContenidoMesa();
 
-//        for (Jugador jugador : jugadores) {
-//            seleccionarCarta(jugador);
-//        }
-//
-//        iu.mostrarMensaje("Todas las cartas han sido seleccionadas correctamente.");
-//        for (Jugador jugador : jugadores) {
-//            iu.mostrarMensaje(jugador.getNombre() + " ha seleccionado la carta: " + jugador.getCartaSeleccionada());
-//        }
-//        List<Carta> cartasEnOrden = obtenerCartasEnOrdenCreciente(jugadores);
-//        colocarCartasSeleccionadas(cartasEnOrden, mesa.getCuatroSobrantes());
-//        mesa.mostrarContenidoMesa();
         while (!todosSinCartas()) {
-            // Turno de cada jugador
+            // Recorre los jugadores
             for (Jugador jugador : jugadores) {
-                // Si el jugador aún tiene cartas en la mano
-                if (!jugador.getMano().isEmpty()) {
-                    seleccionarCarta(jugador);
-                }
+                seleccionarCarta(jugador);
             }
 
             // Mostrar las cartas seleccionadas por cada jugador
             iu.mostrarMensaje("Todas las cartas han sido seleccionadas correctamente.");
-            for (Jugador jugador : jugadores) {
-                iu.mostrarMensaje(jugador.getNombre() + " ha seleccionado la carta: " + jugador.getCartaSeleccionada());
-            }
-
+            mostrarSeleccionesJugadores();
             // Ordenar las cartas seleccionadas en orden creciente
             List<Carta> cartasEnOrden = obtenerCartasEnOrdenCreciente(jugadores);
 
             // Colocar las cartas seleccionadas en la mesa
             colocarCartasSeleccionadas(cartasEnOrden, mesa.getCuatroSobrantes());
 
-            // Mostrar el estado de la mesa después de colocar las cartas
+            // Mostrar mesa después de colocar las cartas
             mesa.mostrarContenidoMesa();
         }
 
-        // Mostrar mensaje de fin de la partida
+        // Mensaje de fin de partida
         iu.mostrarMensaje("La partida ha finalizado.");
     }
 
 }
-
-
