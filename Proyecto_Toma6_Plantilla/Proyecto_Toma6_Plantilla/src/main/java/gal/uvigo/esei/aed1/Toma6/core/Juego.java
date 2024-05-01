@@ -34,6 +34,7 @@ public class Juego {
         this.iu = iu;
         this.baraja = new Baraja();
         this.mesa = new Mesa();
+        this.selecciones = new ArrayList<>();
     }
 
     public void repartirCartas() {
@@ -220,9 +221,11 @@ public class Juego {
 
         repartirCartas();
         iu.mostrarJugadores(jugadores);
-        List<Carta> cuatroCartas = new ArrayList<>();
-        cuatroCartas = crearCuatroCartas(baraja);
-        mesa.colocarCuatroSobrantesEnMesa(cuatroCartas); // Colocar la carta en la mesa
+        for(int i =0; i<4;i++){
+            Carta carta = baraja.retirarDeBaraja();
+            mesa.colocarCuatroSobrantesEnMesa(carta);
+        }
+         // Colocar la carta en la mesa
         mesa.mostrarContenidoMesa();
 
         while (!todosSinCartas()) {

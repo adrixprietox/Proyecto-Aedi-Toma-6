@@ -28,12 +28,12 @@ public class Mesa {
         return cuatroSobrantes;
     }
 
-    public void colocarCuatroSobrantesEnMesa(List<Carta> cuatroCartas) {
-        // recorre la lista cuatroSobrantes
-        for (int i = 0; i < cuatroSobrantes.length; i++) {
-            cuatroSobrantes[i].add(0, cuatroCartas.get(i)); // Agregar la carta al principio de la lista
+    public void colocarCuatroSobrantesEnMesa(Carta carta) {
+        // recorre la lista en cuatroSobrantes
+        for (List<Carta> lista : cuatroSobrantes) {
+            Carta cartaDiferente = baraja.retirarDeBaraja(); // Obtener una carta diferente de la baraja
+            lista.add(cartaDiferente); // Agregar la carta al principio de la lista
         }
-
     }
 
     public void mostrarContenidoMesa() {
