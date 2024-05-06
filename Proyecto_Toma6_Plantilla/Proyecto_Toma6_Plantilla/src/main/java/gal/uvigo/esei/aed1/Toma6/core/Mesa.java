@@ -29,6 +29,8 @@ public class Mesa {
     }
 
     public void colocarCuatroSobrantesEnMesa() {
+        baraja.barajar();
+
         // recorre la lista en cuatroSobrantes
         for (List<Carta> lista : cuatroSobrantes) {
             Carta cartaDiferente = baraja.retirarDeBaraja(); // Obtener una carta diferente de la baraja

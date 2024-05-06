@@ -22,7 +22,7 @@ public class Baraja {
         int numeroCarta = 1;
         for (int i = 0; i < 104; i++) {
             int bueyes = calcularBueyes (numeroCarta);
-            this.baraja.add(new Carta(numeroCarta, bueyes));;
+            this.baraja.add(new Carta(numeroCarta, bueyes));
             numeroCarta++;
         }
     }

@@ -141,7 +141,7 @@ public class Juego {
         }
     }
 
-    public void colocarCartasSeleccionadas(List<Par<Jugador, Carta>> selecciones, List<Carta>[] cuatroSobrantes) { //COLOCA LAS CARTAS SELECCIONADAS
+    public void colocarCartasSeleccionadas(List<Par<Jugador, Carta>> selecciones, List<Carta>[] cuatroSobrantes) {
         // Recorre las cartas seleccionadas de los jugadores
         for (Par<Jugador, Carta> seleccion : selecciones) {
             Jugador jugador = seleccion.getPrimero();
@@ -149,6 +149,8 @@ public class Juego {
 
             // Encuentra la pila de descarte adecuada para colocar la carta seleccionada
             int[] posicion = encontrarPosicionParaCarta(carta, cuatroSobrantes);
+
+            // Verificar si la carta seleccionada es menor que todas las cartas en la mesa
             boolean todasMayores = true;
             for (List<Carta> fila : cuatroSobrantes) {
                 // Obtener la última carta de la fila
@@ -160,10 +162,23 @@ public class Juego {
                     break; // Si se encuentra una carta menor, se sale del bucle
                 }
             }
-            // Si se encuentra una posición válida, coloca la carta en esa pila
-            if (posicion[0] != -1 && posicion[1] != -1) {
-                // Verificar si la fila está llena
-                if (!todasMayores) {
+
+            // Si todas las cartas en la mesa son mayores o iguales, se informa al jugador
+            if (todasMayores) {
+                int filaSeleccionada = iu.seleccionarFila();
+                if (filaSeleccionada >= 0 && filaSeleccionada < cuatroSobrantes.length) {
+                    // Retirar todas las cartas de esa fila y añadirlas al montón del jugador
+                    List<Carta> cartasRetiradas = new ArrayList<>(cuatroSobrantes[filaSeleccionada]);
+
+                    cuatroSobrantes[filaSeleccionada-1].clear(); // Limpiar la fila
+
+                    // Colocar la carta seleccionada como primera de esa fila en la mesa
+                    cuatroSobrantes[filaSeleccionada - 1].add(0, carta);
+                }
+            } else {
+                // Si se encuentra una posición válida, coloca la carta en esa pila
+                if (posicion[0] != -1 && posicion[1] != -1) {
+                    // Verificar si la fila está llena
                     if (cuatroSobrantes[posicion[0]].size() >= 5) {
                         // La fila está llena, retirar las cartas
                         List<Carta> cartasRetiradas = new ArrayList<>(cuatroSobrantes[posicion[0]]);
@@ -176,20 +191,8 @@ public class Juego {
                         // La fila no está llena, colocar la carta en esa pila
                         cuatroSobrantes[posicion[0]].add(carta);
                     }
-                } else {
-                    int filaSeleccionada = iu.seleccionarFila();
-                    if (filaSeleccionada >= 0 && filaSeleccionada < cuatroSobrantes.length) {
-                        // Retirar todas las cartas de esa fila y añadirlas al montón del jugador
-                        List<Carta> cartasRetiradas = new ArrayList<>(cuatroSobrantes[filaSeleccionada]);
-                        jugador.getMano().addAll(cartasRetiradas);
-                        cuatroSobrantes[filaSeleccionada].clear(); // Limpiar la fila
-
-                        // Colocar la carta seleccionada como primera de esa fila en la mesa
-                        cuatroSobrantes[filaSeleccionada].add(0, carta);
-                    }
                 }
             }
-
         }
     }
 
@@ -214,6 +217,7 @@ public class Juego {
                 + "repartiendo cartas, por favor espere");
 
         repartirCartas();
+        baraja.barajar();
         iu.mostrarJugadores(jugadores);
         mesa.colocarCuatroSobrantesEnMesa();
 
