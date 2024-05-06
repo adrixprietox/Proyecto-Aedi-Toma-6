@@ -133,5 +133,8 @@ public class IU {
     public int pedirSeleccionCarta() {
         return leeNum("Elige el número de la carta que deseas colocar en la mesa: ");
     }
+    public int seleccionarFila(){
+        return leeNum("Tu carta es menor que todas las cartas,que fila deseas llevar a tu montón: ");
+    }
 
 }
